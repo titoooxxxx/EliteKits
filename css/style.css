@@ -1,0 +1,210 @@
+/* =====================
+   STYLE GLOBAL ELITEKITS
+   ===================== */
+
+
+:root {
+  --violet: #6c63ff;
+  --bleu: #00bfff;
+  --noir: #0d0d0d;
+  --gris-clair: #f5f6fa;
+  --blanc: #ffffff;
+  --degrade: linear-gradient(135deg, var(--violet), var(--bleu));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: var(--gris-clair);
+  color: var(--noir);
+  scroll-behavior: smooth;
+}
+
+/* =====================
+   HEADER
+   ===================== */
+header {
+  background: var(--degrade);
+  color: var(--blanc);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px var(--violet); }
+  to { text-shadow: 0 0 20px var(--bleu); }
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: var(--blanc);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  text-shadow: 0 0 8px var(--blanc);
+}
+
+/* =====================
+   HERO
+   ===================== */
+.hero {
+  text-align: center;
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(0,191,255,0.2));
+  border-radius: 0 0 30px 30px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  color: var(--violet);
+  font-weight: 700;
+}
+
+.hero p {
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* =====================
+   RECHERCHE
+   ===================== */
+#search-section {
+  text-align: center;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--blanc);
+  border-radius: 25px;
+  width: 80%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+#search-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--violet);
+  font-size: 2rem;
+}
+
+.search-box {
+  position: relative;
+  display: inline-block;
+  width: 60%;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#searchInput:focus {
+  border: 2px solid var(--bleu);
+  box-shadow: 0 0 20px rgba(108,99,255,0.3);
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: var(--blanc);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: 0.3s;
+  width: 200px;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-card p {
+  padding: 0.8rem;
+  color: var(--violet);
+  font-weight: 600;
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+footer {
+  background: var(--degrade);
+  color: var(--blanc);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 4rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* =====================
+   ANIMATIONS
+   ===================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}

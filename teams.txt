@@ -1,0 +1,499 @@
+Arsenal
+Aston Villa
+Bournemouth
+Brentford
+Brighton & Hove Albion
+Burnley
+Chelsea
+Crystal Palace
+Everton
+Fulham
+Liverpool
+Luton Town
+Manchester City
+Manchester United
+Newcastle United
+Nottingham Forest
+Sheffield United
+Tottenham Hotspur
+West Ham United
+Wolverhampton Wanderers
+Birmingham City
+Blackburn Rovers
+Bristol City
+Cardiff City
+Coventry City
+Derby County
+Huddersfield Town
+Hull City
+Ipswich Town
+Leeds United
+Leicester City
+Middlesbrough
+Millwall
+Norwich City
+Preston North End
+Rotherham United
+Sheffield Wednesday
+Stoke City
+Sunderland
+Swansea City
+Watford
+West Bromwich Albion
+Wigan Athletic
+Real Madrid
+FC Barcelona
+Atlético Madrid
+Sevilla
+Real Sociedad
+Real Betis
+Villarreal
+Athletic Club
+Valencia
+Celta de Vigo
+Getafe
+Osasuna
+Rayo Vallecano
+Granada
+Mallorca
+Alavés
+Cádiz
+Girona
+Las Palmas
+Elche
+Almería
+Eibar
+Espanyol
+Levante
+Leganés
+Sporting Gijón
+Real Valladolid
+Racing Santander
+Tenerife
+Zaragoza
+Mirandés
+Oviedo
+Cartagena
+Burgos
+Albacete
+Alcorcón
+Sabadell
+Huesca
+Ponferradina
+Burgos CF
+Paris Saint-Germain
+Olympique de Marseille
+Olympique Lyonnais
+AS Monaco
+LOSC Lille
+OGC Nice
+RC Lens
+Stade Rennais
+FC Lorient
+Clermont Foot
+Montpellier HSC
+Stade de Reims
+Toulouse FC
+FC Nantes
+RC Strasbourg
+Angers SCO
+Grenoble
+AJ Auxerre
+Le Havre
+ESTAC Troyes
+AC Ajaccio
+SM Caen
+FC Metz
+Paris FC
+En Avant Guingamp
+FC Girondins de Bordeaux
+Sochaux
+Valenciennes
+US Quevilly
+Rodez AF
+Pau FC
+Amiens SC
+Dijon FCO
+Nîmes Olympique
+Chamois Niortais
+Le Mans
+Stade Lavallois
+FC Annecy
+Bastia
+Stade Briochin
+Juventus
+Inter Milan
+AC Milan
+Napoli
+AS Roma
+Lazio
+Atalanta
+Fiorentina
+Torino
+Sassuolo
+Udinese
+Bologna
+Monza
+Empoli
+Spezia
+Lecce
+Hellas Verona
+Salernitana
+Genoa
+Cagliari
+Bayern Munich
+Borussia Dortmund
+RB Leipzig
+Bayer Leverkusen
+Eintracht Frankfurt
+VfL Wolfsburg
+Union Berlin
+Borussia Mönchengladbach
+TSG Hoffenheim
+VfB Stuttgart
+1. FC Köln
+SC Freiburg
+Mainz 05
+FC Heidenheim
+FC Augsburg
+Hertha BSC
+Hamburger SV
+FC Schalke 04
+Ajax
+PSV Eindhoven
+Feyenoord
+AZ Alkmaar
+FC Twente
+Vitesse
+Heerenveen
+FC Utrecht
+PEC Zwolle
+Excelsior
+Sparta Rotterdam
+RKC Waalwijk
+Willem II
+Go Ahead Eagles
+Fortuna Sittard
+Cambuur
+Heracles Almelo
+FC Porto
+SL Benfica
+Sporting CP
+SC Braga
+Boavista
+Marítimo
+Gil Vicente
+Moreirense
+Famalicão
+Estoril
+Santa Clara
+Rio Ave
+Arouca
+Vitória SC
+Portimonense
+Galatasaray
+Fenerbahçe
+Beşiktaş
+Trabzonspor
+İstanbul Başakşehir
+Ankaragücü
+Adana Demirspor
+Sivasspor
+Konyaspor
+Antalyaspor
+Gaziantep FK
+Alanyaspor
+Göztepe
+Kasımpaşa
+RSC Anderlecht
+Club Brugge
+Standard Liège
+KAA Gent
+KRC Genk
+Royal Antwerp
+Charleroi
+Sint-Truiden
+OH Leuven
+KV Mechelen
+Celtic
+Rangers
+Aberdeen
+Hearts
+Hibernian
+Dundee United
+St Mirren
+St Johnstone
+Kilmarnock
+Motherwell
+Red Bull Salzburg
+Rapid Wien
+LASK
+Sturm Graz
+Austria Wien
+BSC Young Boys
+FC Basel
+FC Zürich
+Servette FC
+FC Sion
+Olympiacos
+Panathinaikos
+PAOK
+AEK Athens
+Aris Thessaloniki
+Legia Warsaw
+Lech Poznan
+Raków Częstochowa
+Śląsk Wrocław
+Wisła Kraków
+Sparta Prague
+Slavia Prague
+Viktoria Plzeň
+FCSB
+CFR Cluj
+Universitatea Craiova
+Malmö FF
+AIK
+IFK Göteborg
+Djurgårdens IF
+Hammarby IF
+Rosenborg
+Molde FK
+Bodø/Glimt
+Viking FK
+Brann
+FC Copenhagen
+Brøndby IF
+FC Nordsjælland
+Aarhus GF
+AGF
+Red Star Belgrade
+Partizan Belgrade
+Vojvodina
+Dinamo Zagreb
+HNK Rijeka
+Hajduk Split
+Ferencváros
+MTK Budapest
+Újpest
+Slovan Bratislava
+MŠK Žilina
+NK Maribor
+Olimpija Ljubljana
+Lincoln Red Imps
+Europa FC
+HB Tórshavn
+KÍ Klaksvík
+SP Tre Penne
+SP La Fiorita
+FC Andorra
+Inter Club d'Escaldes
+Gżira United
+Palmeiras
+Flamengo
+Corinthians
+São Paulo
+Santos
+Grêmio
+Fluminense
+Internacional
+Atlético Mineiro
+Atlético Paranaense
+Botafogo
+Vasco da Gama
+Ceará
+Fortaleza
+Cruzeiro
+Red Bull Bragantino
+Bahia
+Goiás
+Sport Recife
+América Mineiro
+Boca Juniors
+River Plate
+Racing Club
+Independiente
+San Lorenzo
+Vélez Sarsfield
+Estudiantes
+Huracán
+Lanús
+Godoy Cruz
+Newell's Old Boys
+Rosario Central
+Colo-Colo
+Universidad de Chile
+Universidad Católica
+Peñarol
+Nacional Montevideo
+LA Galaxy
+Inter Miami
+Seattle Sounders
+Atlanta United
+New York City FC
+New York Red Bulls
+Toronto FC
+Vancouver Whitecaps
+CF Montréal
+D.C. United
+Al Hilal
+Al Nassr
+Al Ittihad (Jeddah)
+Persepolis
+Esteghlal
+Shandong Taishan
+Guangzhou Evergrande
+Kashima Antlers
+Urawa Red Diamonds
+Kawasaki Frontale
+Jeonbuk Hyundai Motors
+FC Seoul
+Suwon Samsung Bluewings
+Zenit Saint Petersburg
+CSKA Moscow
+Spartak Moscow
+Krasnodar
+Lokomotiv Moscow
+Dynamo Moscow
+Rubin Kazan
+Rostov
+Ural Yekaterinburg
+PFC Sochi
+FC Khimki
+Torpedo Moscow
+Orenburg
+France
+Brésil
+Brazil
+Argentine
+Argentina
+Angleterre
+England
+Espagne
+Spain
+Allemagne
+Germany
+Italie
+Italy
+Portugal
+Pays-Bas
+Netherlands
+Belgique
+Belgium
+Uruguay
+Colombie
+Colombia
+Chili
+Chile
+Mexique
+Mexico
+États-Unis
+United States
+Canada
+Japon
+Japan
+Corée du Sud
+South Korea
+Australie
+Australia
+Nouvelle-Zélande
+New Zealand
+Sénégal
+Senegal
+Maroc
+Morocco
+Côte d'Ivoire
+Ivory Coast
+Nigéria
+Nigeria
+Ghana
+Cameroun
+Cameroon
+Égypte
+Egypt
+Tunisie
+Tunisia
+Algérie
+Algeria
+Afrique du Sud
+South Africa
+Iran
+Arabie Saoudite
+Saudi Arabia
+Qatar
+Émirats Arabes Unis
+United Arab Emirates
+Turquie
+Turkey
+Russie
+Russia
+Suisse
+Switzerland
+Autriche
+Austria
+Pologne
+Poland
+République tchèque
+Czech Republic
+Roumanie
+Romania
+Bulgarie
+Bulgaria
+Hongrie
+Hungary
+Serbie
+Serbia
+Croatie
+Croatia
+Slovénie
+Slovenia
+Slovaquie
+Slovakia
+Bosnie-Herzégovine
+Bosnia and Herzegovina
+Grèce
+Greece
+Écosse
+Scotland
+Pays de Galles
+Wales
+Irlande
+Ireland
+Irlande du Nord
+Northern Ireland
+Israël
+Israel
+Kazakhstan
+Arménie
+Armenia
+Géorgie
+Georgia
+Azerbaïdjan
+Azerbaijan
+Albanie
+Albania
+Macédoine du Nord
+North Macedonia
+Monténégro
+Montenegro
+Kosovo
+Luxembourg
+Estonie
+Estonia
+Lettonie
+Latvia
+Lituanie
+Lithuania
+Malte
+Malta
+Chypre
+Cyprus
+Islande
+Iceland
+Finlande
+Finland
+Norvège
+Norway
+Suède
+Sweden
+Danemark
+Denmark
