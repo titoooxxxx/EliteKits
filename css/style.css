@@ -208,3 +208,54 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =====================
+   SECTION CONTACT
+   ===================== */
+#contact {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--gris-clair);
+  border-top: 3px solid var(--violet);
+}
+
+#contact h2 {
+  color: var(--violet);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.insta-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--noir);
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.insta-link:hover {
+  color: var(--violet);
+  transform: scale(1.05);
+}
+
+.insta-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.insta-logo:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
