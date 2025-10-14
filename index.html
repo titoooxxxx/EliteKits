@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EliteKits - Accueil</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EliteKits - Maillots d’exception</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a2e0c1e9f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
     <div class="logo">EliteKits</div>
     <nav>
@@ -15,47 +19,51 @@
         <li><a href="player.html">Player</a></li>
         <li><a href="retro.html">Retro</a></li>
         <li><a href="kids.html">Kids</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-<section class="hero">
-  <h1>Découvrez les maillots qui vous inspirent</h1>
-  <p>Fan, Player, Retro ou Kids – Trouvez votre style.</p>
+  <!-- HERO / BANNIÈRE -->
+  <section class="hero">
+    <img src="images/neymar-banner.jpg" alt="Neymar" class="hero-img" />
+    <div class="hero-text">
+      <h1>Bienvenue sur <span class="neon">EliteKits</span></h1>
+      <p>Découvrez notre catalogue exclusif de maillots / prise de commande sur notre instagram.</p>
 
-  <div class="hero-social">
-    <a href="https://www.instagram.com/elitekits.jersey" target="_blank" aria-label="Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-        <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
-      </svg>
-      <span>@elitekits.jersey</span>
-    </a>
-  </div>
-</section>
+      <div class="hero-social">
+        <a href="https://www.instagram.com/elitekits.jersey" target="_blank" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+          </svg>
+          <span>@elitekits.jersey</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-
+  <!-- SEARCH SECTION -->
   <section id="search-section" class="fade-in">
     <h2>Rechercher un maillot</h2>
-    <input type="text" id="searchInput" placeholder="Ex: PSG, Real Madrid, Arsenal...">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Ex : PSG, Real Madrid, Arsenal..." autocomplete="off" />
+    </div>
     <div id="resultsContainer" class="results"></div>
   </section>
 
-<footer>
-  <p>&copy; 2025 EliteKits. Tous droits réservés.</p>
-  <div class="social-links">
-    <a href="https://www.instagram.com/elitekits.jersey" target="_blank" aria-label="Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-        <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
-      </svg>
-      <span>@elitekits.jersey</span>
-    </a>
-  </div>
-</footer>
 
+  <!-- PAGES catégories: ces pages existent séparément (fan.html, player.html ...) -->
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact">
+    <p>📩 Pour toute commande, contactez-nous sur Instagram</p>
+    <a href="https://www.instagram.com/elitekits.jersey" target="_blank" class="insta-link">
+      <i class="fab fa-instagram"></i> <strong>@elitekits.jersey</strong>
+    </a>
+    <p>&copy; 2025 EliteKits. Tous droits réservés.</p>
+  </footer>
 
   <script src="js/script.js"></script>
 </body>

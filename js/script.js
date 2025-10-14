@@ -1,74 +1,71 @@
-// === script.js ===
+// js/script.js
 
-// Sélection des éléments du DOM
 const searchInput = document.getElementById("searchInput");
 const resultsContainer = document.getElementById("resultsContainer");
 
-// Charger le fichier metadata.json
 let metadata = {};
 
+// charge metadata.json (doit être à la racine : EliteKits/metadata.json)
 fetch("metadata.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Erreur lors du chargement de metadata.json");
-    }
-    return response.json();
+  .then(res => {
+    if (!res.ok) throw new Error("metadata.json introuvable");
+    return res.json();
   })
   .then(data => {
     metadata = data;
-    console.log("✅ Metadata chargée :", Object.keys(metadata).length, "images");
+    console.log("Metadata chargée :", Object.keys(metadata).length, "images");
   })
-  .catch(error => {
-    console.error("❌ Erreur de chargement metadata :", error);
+  .catch(err => {
+    console.error("Erreur chargement metadata:", err);
   });
 
-// Fonction de recherche
+// utilitaire : normalize path (si metadata contient "fan/xxx.jpg" on renvoie "images/fan/xxx.jpg")
+function normalizeSrc(path) {
+  if (!path) return "";
+  // si path commence par http ou / ou images/ on garde
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) return path;
+  if (path.startsWith("images/")) return path;
+  // sinon on suppose qu'il s'agit d'un chemin relatif comme "fan/medium-1.jpg"
+  return `images/${path}`;
+}
+
+function createCard(src, team, score) {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.innerHTML = `
+    <a href="${src}" target="_blank" class="card-link">
+      <img src="${src}" alt="${team || "Maillot"}" loading="lazy">
+      <div class="card-info">
+        <p class="team">${team || "Inconnu"}</p>
+        ${score ? `<small class="score">score: ${Number(score).toFixed(2)}</small>` : ""}
+      </div>
+    </a>
+  `;
+  return card;
+}
+
 function searchTeam(query) {
   resultsContainer.innerHTML = "";
-
   if (!query) return;
-
-  query = query.toLowerCase();
-  let found = false;
+  const q = query.toLowerCase();
+  let found = 0;
 
   for (const [path, info] of Object.entries(metadata)) {
-    if (info.team && info.team.toLowerCase().includes(query)) {
-      found = true;
-
-      const card = document.createElement("div");
-      card.classList.add("product-card");
-      card.innerHTML = `
-        <img src="images/${path}" alt="${info.team}">
-        <p>${info.team}</p>
-      `;
-      resultsContainer.appendChild(card);
+    const team = (info && info.team) ? String(info.team) : "";
+    if (team.toLowerCase().includes(q)) {
+      const src = normalizeSrc(path);
+      resultsContainer.appendChild(createCard(src, team, info.score));
+      found++;
     }
   }
 
-  if (!found) {
+  if (found === 0) {
     resultsContainer.innerHTML = "<p>Aucun maillot trouvé.</p>";
   }
 }
 
-// Événement sur la recherche
+// écoute
 searchInput.addEventListener("input", e => {
-  const query = e.target.value.trim();
-  searchTeam(query);
+  const q = e.target.value.trim();
+  searchTeam(q);
 });
-// === Animation d'apparition au scroll ===
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  for (let i = 0; i < reveals.length; i++) {
-    const windowHeight = window.innerHeight;
-    const elementTop = reveals[i].getBoundingClientRect().top;
-    const revealPoint = 150;
-
-    if (elementTop < windowHeight - revealPoint) {
-      reveals[i].classList.add("active");
-    }
-  }
-}
-
-window.addEventListener("scroll", revealOnScroll);
-
