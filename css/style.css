@@ -259,3 +259,130 @@ footer {
   transform: rotate(10deg) scale(1.1);
 }
 
+/* === Animations modernes === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet sur les images */
+.products img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.products img:hover {
+  transform: scale(1.07);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Lien Instagram stylé */
+.insta-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #6c63ff;
+  font-weight: 600;
+}
+
+.insta-link:hover {
+  text-shadow: 0 0 8px #00bfff;
+}
+
+.insta-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+/* Mise en valeur des titres */
+.highlight {
+  color: var(--bleu);
+  font-weight: 700;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: var(--degrade);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.hero p {
+  text-align: center;
+  color: #444;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+/* === Réseaux sociaux / footer === */
+.social-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--blanc);
+  text-decoration: none;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.social-links svg {
+  transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+.social-links a:hover svg {
+  transform: scale(1.15);
+  stroke: var(--bleu);
+}
+
+.social-links a:hover span {
+  color: var(--bleu);
+}
+/* === Liens Instagram sur la page d'accueil === */
+.hero-social {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-social a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--violet);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.hero-social svg {
+  stroke: var(--violet);
+  transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+.hero-social a:hover svg {
+  transform: scale(1.15);
+  stroke: var(--bleu);
+}
+
+.hero-social a:hover span {
+  color: var(--bleu);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
