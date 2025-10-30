@@ -20,6 +20,7 @@
         <li><a href="retro.html">Retro</a></li>
         <li><a href="kids.html">Kids</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#" data-cart-open>Panier (<span id="cartCount">0</span>)</a></li>
       </ul>
     </nav>
   </header>
@@ -64,6 +65,10 @@
     </a>
     <p>&copy; 2025 EliteKits. Tous droits réservés.</p>
   </footer>
+
+  <!-- UI roots injected by JS if missing -->
+  <div id="cartDrawer" class="cart-drawer" style="display:none"></div>
+  <div id="addModal" class="modal hidden" style="display:none"></div>
 
   <script src="js/script.js"></script>
 </body>

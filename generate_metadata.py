@@ -98,8 +98,45 @@ def process_images_and_match(model, processor, images, teams_emb, teams, device,
             score = float(topv.item())
             team_idx = int(topi.item())
             predicted = teams[team_idx] if score >= threshold else "unknown"
-            results[rel_paths[j]] = {"team": predicted, "score": score}
+            # enrich: category from path and player guess
+            category = rel_paths[j].split('/')[0].lower()
+            if category == 'player':
+                category = 'pro'
+            elif category == 'kids':
+                category = 'enfant'
+            player = guess_player(rel_paths[j])
+            predicted = normalize_team(predicted)
+            results[rel_paths[j]] = {"team": predicted, "club": predicted, "score": score, "category": category, "player": player}
     return results
+
+def guess_player(path: str) -> str:
+    name = os.path.basename(path).lower()
+    candidates = [
+        'messi','ronaldo','cristiano','mbappe','neymar','haaland','bellingham','vinicius','vini','griezmann','kane','salah','rashford','odegaard','foden','lewandowski','modric','valverde','odegaard'
+    ]
+    for p in candidates:
+        if p in name:
+            return p
+    return ""
+
+def normalize_team(team: str) -> str:
+    t = (team or '').strip()
+    mapping = {
+        'psg': 'Paris Saint-Germain',
+        'paris fc': 'Paris FC',
+        'fc barcelone': 'FC Barcelone',
+        'barcelona': 'FC Barcelone',
+        'barça': 'FC Barcelone',
+        'juventus': 'Juventus FC',
+        'everton': 'Everton FC',
+        'chelsea': 'Chelsea FC',
+        'bayern': 'FC Bayern',
+        'rb leipzig': 'RB Leipzig',
+        'newcastle': 'Newcastle United',
+        'vasco': 'Vasco da Gama',
+    }
+    key = t.lower()
+    return mapping.get(key, t)
 
 def save_outputs(results, json_out, csv_out):
     with open(json_out, 'w', encoding='utf-8') as f:
@@ -107,9 +144,9 @@ def save_outputs(results, json_out, csv_out):
     # CSV
     with open(csv_out, 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['path','team','score'])
+        writer.writerow(['path','team','score','category','player'])
         for k,v in results.items():
-            writer.writerow([k, v.get('team',''), v.get('score',0)])
+            writer.writerow([k, v.get('team',''), v.get('score',0), v.get('category',''), v.get('player','')])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
