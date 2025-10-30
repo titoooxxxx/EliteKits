@@ -7,6 +7,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 SMTP_HOST = os.getenv('SMTP_HOST', 'smtp.mail.yahoo.com')
 SMTP_PORT = int(os.getenv('SMTP_PORT', '587'))
@@ -16,6 +17,7 @@ SELLER_EMAIL = os.getenv('SELLER_EMAIL', 'cornictitouan@yahoo.com')
 FROM_EMAIL = os.getenv('FROM_EMAIL', SMTP_USER or SELLER_EMAIL)
 
 app = Flask(__name__, static_folder='.', static_url_path='/')
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.get('/')
 def root():

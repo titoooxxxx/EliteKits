@@ -1,0 +1,5 @@
+# Netlify reverse proxy to your Flask API
+# Replace the target URL below with your deployed Flask base URL (no trailing slash)
+# Example: https://elitekits-api.onrender.com
+
+/api/*  https://YOUR-FLASK-API-BASE-URL/api/:splat  200

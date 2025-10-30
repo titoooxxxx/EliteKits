@@ -474,8 +474,10 @@
     }
     const totals = cartTotals();
     const order = { instagram: ig, totals, items: state.cart.items };
+    const API_BASE = (window.ELITEKITS_API || '').replace(/\/$/, '');
+    const endpoint = API_BASE ? `${API_BASE}/api/order` : '/api/order';
     try {
-      const res = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
+      const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order), mode: API_BASE ? 'cors' : 'same-origin' });
       if (!res.ok) throw new Error('Serveur indisponible');
       alert('Commande envoyée au vendeur. Merci !');
       state.cart = { items: [], ig };
