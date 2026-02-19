@@ -3,77 +3,174 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EliteKits - Maillots d’exception</title>
+  <title>EliteKits — Maillots d'exception</title>
+  <meta name="description" content="EliteKits — Maillots de football authentiques : Fan, Player, Rétro, Kids. Plus de 3 900 références." />
   <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2e0c1e9f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ── HEADER ── -->
   <header>
-    <div class="logo">EliteKits</div>
+    <a href="index.html" class="logo">EliteKits</a>
     <nav>
       <ul>
         <li><a href="fan.html">Fan</a></li>
         <li><a href="player.html">Player</a></li>
-        <li><a href="retro.html">Retro</a></li>
+        <li><a href="retro.html">Rétro</a></li>
         <li><a href="kids.html">Kids</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#" data-cart-open>Panier (<span id="cartCount">0</span>)</a></li>
+        <li class="cart-nav-item">
+          <a href="#" data-cart-open>🛒 Panier (<span id="cartCount">0</span>)</a>
+        </li>
       </ul>
     </nav>
   </header>
 
-  <!-- HERO / BANNIÈRE -->
+  <!-- ── HERO ── -->
   <section class="hero">
-    <img src="images/neymar-banner.jpg" alt="Neymar" class="hero-img" />
-    <div class="hero-text">
-      <h1>Bienvenue sur <span class="neon">EliteKits</span></h1>
-      <p>Découvrez notre catalogue exclusif de maillots / prise de commande sur notre instagram.</p>
-
+    <img src="images/neymar-banner.jpg" alt="EliteKits hero" class="hero-img" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade-in">
+      <div class="hero-badge">Collection 2025 — Maillots Premium</div>
+      <h1>
+        Bienvenue sur<br/>
+        <span class="gradient-text">EliteKits</span>
+      </h1>
+      <p>
+        Découvrez notre catalogue exclusif de maillots de football.<br/>
+        Fan, Player, Rétro ou Kids — trouvez le maillot parfait.
+      </p>
+      <div class="hero-actions">
+        <a href="player.html" class="btn btn-primary">Explorer la collection</a>
+        <a href="#search-section" class="btn btn-secondary">Rechercher un maillot</a>
+      </div>
       <div class="hero-social">
-        <a href="https://www.instagram.com/elitekits.jersey" target="_blank" aria-label="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <span>Commandes &amp; infos :</span>
+        <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
             <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
           </svg>
-          <span>@elitekits.jersey</span>
+          @elitekits.jersey
         </a>
       </div>
     </div>
   </section>
 
-  <!-- SEARCH SECTION -->
-  <section id="search-section" class="fade-in">
-    <h2>Rechercher un maillot</h2>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ex : PSG, Real Madrid, Arsenal..." autocomplete="off" />
+  <!-- ── STATS BAR ── -->
+  <div style="padding: 0 2rem; max-width: 1200px; margin: -3rem auto 0; position: relative; z-index: 2;">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-value">3 900+</div>
+        <div class="stat-label">Maillots disponibles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">499+</div>
+        <div class="stat-label">Clubs référencés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Collections</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">25€</div>
+        <div class="stat-label">À partir de</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORIES ── -->
+  <section class="categories-section">
+    <div class="section-header">
+      <span class="section-label">★ Nos Collections</span>
+      <h2>Choisissez votre style</h2>
+    </div>
+    <div class="category-cards">
+      <a href="fan.html" class="category-card">
+        <div class="category-icon">👕</div>
+        <h3>Fan</h3>
+        <p>Répliques de haute qualité pour supporter votre club avec style.</p>
+        <span class="category-count">1 073 maillots</span>
+      </a>
+      <a href="player.html" class="category-card">
+        <div class="category-icon">⚽</div>
+        <h3>Player</h3>
+        <p>Version authentique avec tissus officiels et finitions pro.</p>
+        <span class="category-count">1 988 maillots</span>
+      </a>
+      <a href="retro.html" class="category-card">
+        <div class="category-icon">🏆</div>
+        <h3>Rétro</h3>
+        <p>Revivre les grandes épopées avec des maillots iconiques du passé.</p>
+        <span class="category-count">735 maillots</span>
+      </a>
+      <a href="kids.html" class="category-card">
+        <div class="category-icon">⭐</div>
+        <h3>Kids</h3>
+        <p>Tailles enfants pour les jeunes supporters, du 4 au 14 ans.</p>
+        <span class="category-count">132 maillots</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── SEARCH ── -->
+  <section id="search-section">
+    <div class="search-wrapper">
+      <h2>Trouvez votre maillot</h2>
+      <p>Recherchez par club, joueur ou catégorie parmi tout notre catalogue.</p>
+      <div class="search-box">
+        <i class="search-icon fa fa-search"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="PSG, Real Madrid, Mbappe, Rétro..."
+          autocomplete="off"
+        />
+      </div>
     </div>
     <div id="resultsContainer" class="results"></div>
   </section>
 
-
-  <!-- PAGES catégories: ces pages existent séparément (fan.html, player.html ...) -->
-
-  <!-- CONTACT / FOOTER -->
-  <footer id="contact">
-    <p>📩 Pour toute commande, contactez-nous sur Instagram</p>
-    <a href="https://www.instagram.com/elitekits.jersey" target="_blank" class="insta-link">
-      <i class="fab fa-instagram"></i> <strong>@elitekits.jersey</strong>
+  <!-- ── INSTAGRAM CTA ── -->
+  <section class="instagram-section" id="contact">
+    <h2>Passez votre commande</h2>
+    <p>
+      Ajoutez vos articles au panier, puis contactez-nous sur Instagram<br/>
+      pour finaliser votre commande. Réponse rapide garantie !
+    </p>
+    <a
+      href="https://www.instagram.com/elitekits.jersey"
+      target="_blank"
+      rel="noopener"
+      class="insta-link"
+    >
+      <i class="fab fa-instagram"></i>
+      @elitekits.jersey
     </a>
-    <p>&copy; 2025 EliteKits. Tous droits réservés.</p>
+    <p style="margin-top:1.25rem; font-size:0.82rem; color:var(--muted);">
+      ⭐ Offre : flocage offert dès 2 maillots commandés ensemble !
+    </p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>
+      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i> @elitekits.jersey
+      </a>
+    </p>
+    <p style="margin-top:0.5rem;">&copy; 2025 EliteKits — Tous droits réservés.</p>
   </footer>
 
-  <!-- UI roots injected by JS if missing -->
-  <div id="cartDrawer" class="cart-drawer" style="display:none"></div>
-  <div id="addModal" class="modal hidden" style="display:none"></div>
+  <!-- UI roots (populated by JS) -->
+  <div id="cartDrawer" class="cart-drawer"></div>
+  <div id="addModal" class="modal hidden"></div>
 
-  <script>
-    // Renseigne ceci en production si ton API Flask est hébergée ailleurs
-    // window.ELITEKITS_API = "https://ton-api.exemple.com";
-  </script>
   <script src="js/script.js"></script>
 </body>
 </html>

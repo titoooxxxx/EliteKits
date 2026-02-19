@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EliteKits - Maillots Player</title>
+  <title>EliteKits — Collection Player</title>
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0c1e9f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    <div class="logo">EliteKits</div>
+    <a href="index.html" class="logo">EliteKits</a>
     <nav>
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="fan.html">Fan</a></li>
-        <li><a href="retro.html">Retro</a></li>
+        <li><a href="player.html" class="active">Player</a></li>
+        <li><a href="retro.html">Rétro</a></li>
         <li><a href="kids.html">Kids</a></li>
-        <li><a href="#" data-cart-open>Panier (<span id="cartCount">0</span>)</a></li>
+        <li class="cart-nav-item"><a href="#" data-cart-open>🛒 Panier (<span id="cartCount">0</span>)</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section class="hero fade-in">
+    <section class="category-hero fade-in">
       <h1>Collection <span class="highlight">Player</span></h1>
-      <p>Découvrez les maillots authentiques portés par les joueurs, avec les tissus officiels et les détails professionnels.</p>
+      <p>Version authentique avec tissus officiels et finitions professionnelles — comme les pros.</p>
     </section>
 
     <section>
-      <h2>Nos maillots Player</h2>
       <div class="products fade-in">
        <img src="images/player/maillots-player (1).jpeg" alt="Maillot player 1">
 <img src="images/player/maillots-player (2).jpeg" alt="Maillot player 2">
@@ -2033,7 +2035,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 EliteKits. Tous droits réservés.</p>
+    <p>
+      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i> @elitekits.jersey
+      </a>
+    </p>
+    <p style="margin-top:0.5rem;">&copy; 2025 EliteKits — Tous droits réservés.</p>
   </footer>
+
+  <div id="cartDrawer" class="cart-drawer"></div>
+  <div id="addModal" class="modal hidden"></div>
+  <script src="js/script.js"></script>
 </body>
 </html>
