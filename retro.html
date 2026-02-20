@@ -3,35 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EliteKits — Collection Rétro. 735 maillots iconiques dès 30€.">
   <title>EliteKits — Collection Rétro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e0c1e9f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <a href="index.html" class="logo">EliteKits</a>
-    <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="fan.html">Fan</a></li>
-        <li><a href="player.html">Player</a></li>
-        <li><a href="retro.html" class="active">Rétro</a></li>
-        <li><a href="kids.html">Kids</a></li>
-        <li class="cart-nav-item"><a href="#" data-cart-open>🛒 Panier (<span id="cartCount">0</span>)</a></li>
-      </ul>
-    </nav>
-  </header>
+<header class="site-header" id="siteHeader">
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo">Elite<span class="logo-dot">Kits</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="fan.html">Fan</a></li>
+      <li><a href="player.html">Player</a></li>
+      <li><a href="retro.html" class="active">Rétro</a></li>
+      <li><a href="kids.html">Kids</a></li>
+    </ul>
+    <div class="nav-end">
+      <button class="cart-btn" data-cart-open aria-label="Voir le panier">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+      <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+</header>
 
-  <main>
-    <section class="category-hero fade-in">
-      <h1>Collection <span class="highlight">Rétro</span></h1>
-      <p>Revivez les grandes épopées du football avec nos maillots iconiques du passé.</p>
-    </section>
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Collection</span>
+    <h1 class="section-title">Rétro</h1>
+    <p class="section-sub">Revivez les grandes épopées du football avec nos maillots iconiques du passé.</p>
+  </div>
+</section>
 
-    <section>
-      <div class="products fade-in">
-        <img src="images/retro/maillots-retro (1).jpeg" alt="Maillot retro 1">
+<section class="catalog-section">
+  <div class="container">
+    <div class="catalog-header">
+      <p class="catalog-count"><strong>735</strong> maillots disponibles</p>
+    </div>
+    <div class="products" id="products">
+      <img src="images/retro/maillots-retro (1).jpeg" alt="Maillot retro 1">
 <img src="images/retro/maillots-retro (2).jpeg" alt="Maillot retro 2">
 <img src="images/retro/maillots-retro (3).jpeg" alt="Maillot retro 3">
 <img src="images/retro/maillots-retro (4).jpeg" alt="Maillot retro 4">
@@ -777,21 +793,72 @@
 <img src="images/retro/maillots-retro (733).jpeg" alt="Maillot retro 733">
 <img src="images/retro/maillots-retro (734).jpeg" alt="Maillot retro 734">
 <img src="images/retro/maillots-retro (735).jpeg" alt="Maillot retro 735">
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Elite<span class="logo-dot">Kits</span></a>
+        <p>Le sp&eacute;cialiste du maillot de football premium. Qualit&eacute; authentique, prix imbattables.</p>
+        <span class="footer-promo-badge">&#127873; Flocage offert d&egrave;s 2 maillots</span>
       </div>
-    </section>
-  </main>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul>
+          <li><a href="fan.html">Fan</a></li>
+          <li><a href="player.html">Player</a></li>
+          <li><a href="retro.html">R&eacute;tro</a></li>
+          <li><a href="kids.html">Kids</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#search">Rechercher</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/elitekits.jersey" target="_blank"><i class="fa-brands fa-instagram"></i> @elitekits.jersey</a></li>
+          <li><a href="mailto:titouan1502@protonmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 EliteKits &mdash; Tous droits r&eacute;serv&eacute;s.</p>
+      <p class="footer-copy">Livraison 5&euro; &bull; Paiement s&eacute;curis&eacute;</p>
+    </div>
+  </div>
+</footer>
 
-  <footer>
-    <p>
-      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
-        <i class="fab fa-instagram"></i> @elitekits.jersey
-      </a>
-    </p>
-    <p style="margin-top:0.5rem;">&copy; 2025 EliteKits — Tous droits réservés.</p>
-  </footer>
-
-  <div id="cartDrawer" class="cart-drawer"></div>
-  <div id="addModal" class="modal hidden"></div>
-  <script src="js/script.js"></script>
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<div class="cart-drawer" id="cartDrawer"></div>
+<div class="modal-overlay" id="addModal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div class="toast" id="toast">
+  <span class="toast-icon"><i class="fa-solid fa-check"></i></span>
+  <span id="toastMsg">Ajout&eacute; au panier</span>
+</div>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic', offset: 60 });
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+</script>
+<script src="js/script.js"></script>
 </body>
 </html>

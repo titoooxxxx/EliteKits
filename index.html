@@ -1,176 +1,432 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EliteKits — Maillots d'exception</title>
-  <meta name="description" content="EliteKits — Maillots de football authentiques : Fan, Player, Rétro, Kids. Plus de 3 900 références." />
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2e0c1e9f5.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EliteKits — Plus de 4 000 maillots de football premium. Fan, Player, Rétro, Kids. Qualité authentique, livraison rapide.">
+  <title>EliteKits — Maillots de Football Premium</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- AOS scroll animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
-  <header>
-    <a href="index.html" class="logo">EliteKits</a>
-    <nav>
-      <ul>
-        <li><a href="fan.html">Fan</a></li>
-        <li><a href="player.html">Player</a></li>
-        <li><a href="retro.html">Rétro</a></li>
-        <li><a href="kids.html">Kids</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="cart-nav-item">
-          <a href="#" data-cart-open>🛒 Panier (<span id="cartCount">0</span>)</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<!-- ===========================
+     HEADER
+     =========================== -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo">Elite<span class="logo-dot">Kits</span></a>
 
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <img src="images/neymar-banner.jpg" alt="EliteKits hero" class="hero-img" />
-    <div class="hero-overlay"></div>
-    <div class="hero-content fade-in">
-      <div class="hero-badge">Collection 2025 — Maillots Premium</div>
-      <h1>
-        Bienvenue sur<br/>
-        <span class="gradient-text">EliteKits</span>
-      </h1>
-      <p>
-        Découvrez notre catalogue exclusif de maillots de football.<br/>
-        Fan, Player, Rétro ou Kids — trouvez le maillot parfait.
-      </p>
-      <div class="hero-actions">
-        <a href="player.html" class="btn btn-primary">Explorer la collection</a>
-        <a href="#search-section" class="btn btn-secondary">Rechercher un maillot</a>
-      </div>
-      <div class="hero-social">
-        <span>Commandes &amp; infos :</span>
-        <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
-          </svg>
-          @elitekits.jersey
-        </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="fan.html">Fan</a></li>
+      <li><a href="player.html">Player</a></li>
+      <li><a href="retro.html">Rétro</a></li>
+      <li><a href="kids.html">Kids</a></li>
+      <li><a href="#search">Recherche</a></li>
+    </ul>
+
+    <div class="nav-end">
+      <button class="cart-btn" data-cart-open aria-label="Voir le panier">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+      <div class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
       </div>
     </div>
-  </section>
+  </nav>
+</header>
 
-  <!-- ── STATS BAR ── -->
-  <div style="padding: 0 2rem; max-width: 1200px; margin: -3rem auto 0; position: relative; z-index: 2;">
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-value">3 900+</div>
+<!-- ===========================
+     HERO
+     =========================== -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content container">
+    <span class="hero-eyebrow">⚡ Collection 2025</span>
+    <h1 class="hero-title">
+      L'élite du<br>
+      <span class="grad-text">maillot de foot</span>
+    </h1>
+    <p class="hero-description">
+      Plus de 4&nbsp;000 maillots premium. Qualité authentique, prix imbattable.
+    </p>
+    <div class="hero-cta">
+      <a href="#search" class="btn btn-primary">
+        <i class="fa-solid fa-magnifying-glass"></i> Rechercher
+      </a>
+      <a href="player.html" class="btn btn-ghost">
+        Explorer la collection <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<!-- ===========================
+     MARQUEE
+     =========================== -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ===========================
+     STATS
+     =========================== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item" data-aos="fade-up">
+        <div class="stat-value">4<span class="accent">K</span>+</div>
         <div class="stat-label">Maillots disponibles</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-value">499+</div>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="80">
+        <div class="stat-value">499</div>
         <div class="stat-label">Clubs référencés</div>
       </div>
-      <div class="stat-item">
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="160">
         <div class="stat-value">4</div>
         <div class="stat-label">Collections</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-value">25€</div>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="240">
+        <div class="stat-value">25<span class="accent">€</span></div>
         <div class="stat-label">À partir de</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ── CATEGORIES ── -->
-  <section class="categories-section">
-    <div class="section-header">
-      <span class="section-label">★ Nos Collections</span>
-      <h2>Choisissez votre style</h2>
+<!-- ===========================
+     CATEGORIES
+     =========================== -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="eyebrow">Collections</span>
+      <h2 class="section-title">Choisissez votre style</h2>
+      <p class="section-sub">Quatre collections pour tous les passionnés de football.</p>
     </div>
-    <div class="category-cards">
-      <a href="fan.html" class="category-card">
-        <div class="category-icon">👕</div>
-        <h3>Fan</h3>
-        <p>Répliques de haute qualité pour supporter votre club avec style.</p>
-        <span class="category-count">1 073 maillots</span>
-      </a>
-      <a href="player.html" class="category-card">
-        <div class="category-icon">⚽</div>
-        <h3>Player</h3>
-        <p>Version authentique avec tissus officiels et finitions pro.</p>
-        <span class="category-count">1 988 maillots</span>
-      </a>
-      <a href="retro.html" class="category-card">
-        <div class="category-icon">🏆</div>
-        <h3>Rétro</h3>
-        <p>Revivre les grandes épopées avec des maillots iconiques du passé.</p>
-        <span class="category-count">735 maillots</span>
-      </a>
-      <a href="kids.html" class="category-card">
-        <div class="category-icon">⭐</div>
-        <h3>Kids</h3>
-        <p>Tailles enfants pour les jeunes supporters, du 4 au 14 ans.</p>
-        <span class="category-count">132 maillots</span>
-      </a>
-    </div>
-  </section>
 
-  <!-- ── SEARCH ── -->
-  <section id="search-section">
-    <div class="search-wrapper">
-      <h2>Trouvez votre maillot</h2>
-      <p>Recherchez par club, joueur ou catégorie parmi tout notre catalogue.</p>
-      <div class="search-box">
-        <i class="search-icon fa fa-search"></i>
+    <div class="categories-grid">
+      <!-- Fan -->
+      <a href="fan.html" class="cat-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="cat-tint cat-tint-fan"></div>
+        <img class="cat-jersey" src="images/fan/maillots-fan (1).jpeg" alt="Maillot Fan" loading="lazy">
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-badge-label">Collection</span>
+          <div class="cat-name">Fan</div>
+          <div class="cat-count">1 192 maillots &bull; dès 25€</div>
+        </div>
+        <div class="cat-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <!-- Player -->
+      <a href="player.html" class="cat-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="cat-tint cat-tint-player"></div>
+        <img class="cat-jersey" src="images/player/maillots-player (1).jpeg" alt="Maillot Player" loading="lazy">
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-badge-label">Collection</span>
+          <div class="cat-name">Player</div>
+          <div class="cat-count">1 988 maillots &bull; dès 30€</div>
+        </div>
+        <div class="cat-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <!-- Rétro -->
+      <a href="retro.html" class="cat-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="cat-tint cat-tint-retro"></div>
+        <img class="cat-jersey" src="images/retro/maillots-retro (1).jpeg" alt="Maillot Rétro" loading="lazy">
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-badge-label">Collection</span>
+          <div class="cat-name">Rétro</div>
+          <div class="cat-count">735 maillots &bull; dès 30€</div>
+        </div>
+        <div class="cat-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <!-- Kids -->
+      <a href="kids.html" class="cat-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="cat-tint cat-tint-kids"></div>
+        <img class="cat-jersey" src="images/kids/maillots-kids (1).jpeg" alt="Maillot Kids" loading="lazy">
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-badge-label">Collection</span>
+          <div class="cat-name">Kids</div>
+          <div class="cat-count">132 maillots &bull; dès 25€</div>
+        </div>
+        <div class="cat-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     SEARCH (Apple Spotlight)
+     =========================== -->
+<section class="search-section" id="search">
+  <div class="container">
+    <div class="search-center">
+      <div class="section-header" style="text-align:center; margin-bottom:2.5rem;" data-aos="fade-up">
+        <span class="eyebrow">Recherche</span>
+        <h2 class="section-title">Trouvez votre maillot</h2>
+        <p class="section-sub" style="margin:0 auto;">Tapez un club, un joueur, une ligue ou une année.</p>
+      </div>
+
+      <!-- Search input -->
+      <div class="search-box" data-aos="fade-up" data-aos-delay="80">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <input
           type="text"
           id="searchInput"
-          placeholder="PSG, Real Madrid, Mbappe, Rétro..."
+          placeholder="Ex : PSG, Real Madrid, Mbappé, Rétro..."
           autocomplete="off"
-        />
+          spellcheck="false"
+        >
+        <button class="search-clear" id="searchClear" aria-label="Effacer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Popular tags -->
+      <div class="search-tags" data-aos="fade-up" data-aos-delay="120">
+        <span class="search-tag" data-query="PSG">PSG</span>
+        <span class="search-tag" data-query="Real Madrid">Real Madrid</span>
+        <span class="search-tag" data-query="Barcelona">Barcelona</span>
+        <span class="search-tag" data-query="Manchester City">Man City</span>
+        <span class="search-tag" data-query="France">France</span>
+        <span class="search-tag" data-query="Retro">Rétro</span>
+        <span class="search-tag" data-query="Juventus">Juventus</span>
+      </div>
+
+      <!-- Category filters -->
+      <div class="search-filters" id="searchFilters" data-aos="fade-up" data-aos-delay="160">
+        <button class="filter-chip active" data-filter="all">Tout</button>
+        <button class="filter-chip" data-filter="fan">Fan</button>
+        <button class="filter-chip" data-filter="player">Player</button>
+        <button class="filter-chip" data-filter="retro">Rétro</button>
+        <button class="filter-chip" data-filter="kids">Kids</button>
       </div>
     </div>
-    <div id="resultsContainer" class="results"></div>
-  </section>
 
-  <!-- ── INSTAGRAM CTA ── -->
-  <section class="instagram-section" id="contact">
-    <h2>Passez votre commande</h2>
-    <p>
-      Ajoutez vos articles au panier, puis contactez-nous sur Instagram<br/>
-      pour finaliser votre commande. Réponse rapide garantie !
-    </p>
-    <a
-      href="https://www.instagram.com/elitekits.jersey"
-      target="_blank"
-      rel="noopener"
-      class="insta-link"
-    >
-      <i class="fab fa-instagram"></i>
-      @elitekits.jersey
-    </a>
-    <p style="margin-top:1.25rem; font-size:0.82rem; color:var(--muted);">
-      ⭐ Offre : flocage offert dès 2 maillots commandés ensemble !
-    </p>
-  </section>
+    <!-- Results -->
+    <div class="search-results-wrap" id="searchResultsWrap" style="display:none;">
+      <div class="results-header">
+        <p class="results-count" id="resultsCount"></p>
+        <button class="btn btn-ghost" id="clearResults" style="padding:8px 16px;font-size:0.8rem;">
+          <i class="fa-solid fa-xmark"></i> Effacer
+        </button>
+      </div>
+      <div id="searchResults"></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <p>
-      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener">
-        <i class="fab fa-instagram"></i> @elitekits.jersey
+<!-- ===========================
+     WHY ELITEKITS
+     =========================== -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="eyebrow">Pourquoi nous choisir</span>
+      <h2 class="section-title">Le meilleur du maillot,<br>au meilleur prix</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item" data-aos="fade-up" data-aos-delay="0">
+        <div class="why-icon">🎯</div>
+        <h3 class="why-title">Qualité Premium</h3>
+        <p class="why-desc">Chaque maillot est sélectionné avec soin. Tissus haute qualité, coutures solides, finitions impeccables.</p>
+      </div>
+      <div class="why-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="why-icon">🚀</div>
+        <h3 class="why-title">Livraison Rapide</h3>
+        <p class="why-desc">Expédition sous 24–48h. Suivi en temps réel. Livraison sécurisée partout en France et en Europe.</p>
+      </div>
+      <div class="why-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="why-icon">✏️</div>
+        <h3 class="why-title">Flocage Personnalisé</h3>
+        <p class="why-desc">Ajoutez votre nom et numéro favori. Flocage professionnel inclus. <strong>Gratuit dès 2 maillots commandés.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     INSTAGRAM CTA
+     =========================== -->
+<section class="insta-section">
+  <div class="container">
+    <div class="insta-inner" data-aos="fade-up">
+      <span class="eyebrow">Commander</span>
+      <h2 class="section-title">Simple comme bonjour</h2>
+
+      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener" class="insta-handle">
+        <i class="fa-brands fa-instagram"></i> @elitekits.jersey
       </a>
-    </p>
-    <p style="margin-top:0.5rem;">&copy; 2025 EliteKits — Tous droits réservés.</p>
-  </footer>
 
-  <!-- UI roots (populated by JS) -->
-  <div id="cartDrawer" class="cart-drawer"></div>
-  <div id="addModal" class="modal hidden"></div>
+      <div class="insta-steps">
+        <div class="insta-step">
+          <div class="insta-step-n">1</div>
+          <div class="insta-step-text">Ajoutez vos maillots au panier et personnalisez-les</div>
+        </div>
+        <div class="insta-step">
+          <div class="insta-step-n">2</div>
+          <div class="insta-step-text">Suivez notre compte <strong>@elitekits.jersey</strong> sur Instagram</div>
+        </div>
+        <div class="insta-step">
+          <div class="insta-step-n">3</div>
+          <div class="insta-step-text">Validez votre commande — nous vous contactons pour le paiement</div>
+        </div>
+      </div>
 
-  <script src="js/script.js"></script>
+      <a href="https://www.instagram.com/elitekits.jersey" target="_blank" rel="noopener" class="btn btn-outline-gold">
+        <i class="fa-brands fa-instagram"></i> Nous suivre sur Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FOOTER
+     =========================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Elite<span class="logo-dot">Kits</span></a>
+        <p>Le spécialiste du maillot de football premium. Qualité authentique, prix imbattables.</p>
+        <span class="footer-promo-badge">🎁 Flocage offert dès 2 maillots</span>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul>
+          <li><a href="fan.html">Fan</a></li>
+          <li><a href="player.html">Player</a></li>
+          <li><a href="retro.html">Rétro</a></li>
+          <li><a href="kids.html">Kids</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#search">Rechercher</a></li>
+          <li><a href="#search">Comment commander</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/elitekits.jersey" target="_blank"><i class="fa-brands fa-instagram"></i> @elitekits.jersey</a></li>
+          <li><a href="mailto:titouan1502@protonmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 EliteKits — Tous droits réservés.</p>
+      <p class="footer-copy">Livraison 5€ &bull; Paiement sécurisé</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===========================
+     CART DRAWER (injected by JS)
+     =========================== -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<div class="cart-drawer" id="cartDrawer"></div>
+
+<!-- ===========================
+     ADD-TO-CART MODAL (injected by JS)
+     =========================== -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast">
+  <span class="toast-icon"><i class="fa-solid fa-check"></i></span>
+  <span id="toastMsg">Ajouté au panier</span>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic', offset: 60 });
+
+  // Header scroll effect
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Hero parallax
+  window.addEventListener('scroll', () => {
+    const bg = document.getElementById('heroBg');
+    if (bg) bg.style.transform = `scale(1.06) translateY(${window.scrollY * 0.15}px)`;
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+
+  // Marquee fill
+  const teams = [
+    'PSG','Real Madrid','Barcelona','Manchester City','Manchester United',
+    'Bayern Munich','Juventus','Liverpool','Chelsea','Arsenal',
+    'Inter Milan','AC Milan','Borussia Dortmund','Atletico Madrid','Porto',
+    'France','Brésil','Argentine','Espagne','Angleterre',
+    'Ajax','Benfica','Olympique de Marseille','AS Roma','Napoli'
+  ];
+  const track = document.getElementById('marqueeTrack');
+  if (track) {
+    const items = [...teams, ...teams].map(t =>
+      `<span class="marquee-item">${t}<span class="dot"></span></span>`
+    ).join('');
+    track.innerHTML = items;
+  }
+
+  // Search popular tags
+  document.querySelectorAll('.search-tag[data-query]').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const input = document.getElementById('searchInput');
+      if (input) {
+        input.value = tag.dataset.query;
+        input.dispatchEvent(new Event('input'));
+        document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Clear search results button
+  document.getElementById('clearResults')?.addEventListener('click', () => {
+    const input = document.getElementById('searchInput');
+    if (input) { input.value = ''; input.dispatchEvent(new Event('input')); }
+  });
+</script>
+<script src="js/script.js"></script>
 </body>
 </html>
