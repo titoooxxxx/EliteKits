@@ -1,0 +1,25 @@
+# EliteKits Scraper — dépendances Python
+# Installer avec : pip install -r requirements.txt
+# Puis : playwright install chromium
+
+# ── Scraping ──────────────────────────────────────────────────
+playwright==1.40.0
+beautifulsoup4==4.12.3
+requests==2.31.0
+aiohttp==3.9.3
+httpx==0.26.0
+
+# ── NLP / Matching ────────────────────────────────────────────
+rapidfuzz==3.6.1
+
+# ── Base de données ───────────────────────────────────────────
+pandas==2.2.0
+
+# ── API de recherche ──────────────────────────────────────────
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.7
+
+# ── Images ────────────────────────────────────────────────────
+Pillow==10.2.0
+aiofiles==23.2.1

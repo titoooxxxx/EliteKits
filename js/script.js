@@ -29,6 +29,9 @@
     allResults: [],
   };
 
+  // Données metadata.json (fallback CLIP) — vide par défaut si products.json chargé
+  let metadata = {};
+
   /* ─────────────────────────────────────────
      DETECT PAGE CATEGORY
   ───────────────────────────────────────── */
@@ -42,26 +45,45 @@
   }
 
   /* ─────────────────────────────────────────
-     METADATA + SEARCH ENGINE
+     PRODUCTS DATABASE + SEARCH ENGINE v3.0
+     Utilise products.json (données Yupoo scrapées)
+     Recherche par nom d'équipe / alias — jamais par couleur
   ───────────────────────────────────────── */
-  let metadata = {};
-  let searchIndex = [];
+  let products   = [];   // products.json complet
+  let searchIndex = [];  // index plat pour la recherche
 
-  fetch('metadata.json')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(data => {
-      metadata = data || {};
-      buildIndex();
-      initSearch();
+  // Charger products.json (nouvelle BDD) en priorité,
+  // tomber en fallback sur metadata.json (ancienne BDD CLIP)
+  const _dataFiles = ['products.json', 'metadata.json'];
+
+  function _loadDataFiles(files, idx = 0) {
+    if (idx >= files.length) {
       enhanceProductGrids();
-    })
-    .catch(() => {
-      enhanceProductGrids();
-    })
-    .finally(() => {
       initCartUI();
-    });
+      return;
+    }
+    fetch(files[idx])
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(data => {
+        const isProducts = Array.isArray(data);
+        if (isProducts) {
+          products = data || [];
+          buildIndexFromProducts();
+        } else {
+          // Ancien format metadata.json
+          metadata = data || {};
+          buildIndexFromMetadata(metadata);
+        }
+        initSearch();
+        enhanceProductGrids();
+        initCartUI();
+      })
+      .catch(() => _loadDataFiles(files, idx + 1));
+  }
 
+  _loadDataFiles(_dataFiles);
+
+  /* ── Normalisation ─────────────────────────────────────────── */
   function normalizeSrc(path) {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('/')) return path;
@@ -69,31 +91,83 @@
     return `images/${path}`;
   }
 
-  function tokenize(str) {
+  function normStr(str) {
     return (str || '')
       .toString()
       .normalize('NFD')
       .replace(/\p{Diacritic}/gu, '')
       .toLowerCase()
-      .split(/[^a-z0-9]+/)
-      .filter(Boolean);
+      .trim();
   }
 
-  function buildIndex() {
-    searchIndex = Object.entries(metadata).map(([path, info]) => {
-      const src      = normalizeSrc(path);
-      const team     = (info && (info.club || info.team)) || '';
-      const category = (info && info.category) || guessCategoryFromPath(path);
-      const player   = (info && info.player)   || guessPlayerFromPath(path);
-      const title    = [team, player].filter(Boolean).join(' ') || 'Maillot';
+  function tokenize(str) {
+    return normStr(str).split(/[^a-z0-9]+/).filter(Boolean);
+  }
+
+  /* ── Construction de l'index depuis products.json ─────────── */
+  function buildIndexFromProducts() {
+    searchIndex = products.map(p => {
+      const src      = p.thumbnail || (p.images && p.images[0]) || '';
+      const team     = p.team      || p.team_short || '';
+      const teamShort = p.team_short || '';
+      const version  = p.version   || 'fan';
+      const category = _versionToCategory(version);
+      const aliases  = (p.team_aliases || []).filter(a => !_isCJK(a));
+      const tags     = p.tags || [];
+
+      // Construire un ensemble de tokens pour la recherche rapide
+      const allText = [team, teamShort, ...aliases, ...tags,
+                       p.league || '', p.country || '', p.season || ''].join(' ');
+
       return {
-        src, path, team, category, player, title,
-        tokens: new Set([...tokenize(team), ...tokenize(category), ...tokenize(player)]),
+        src,
+        team,
+        teamShort,
+        teamKey:   p.team_key || '',
+        category,
+        version,
+        season:    p.season || '',
+        type:      p.type   || '',
+        league:    p.league || '',
+        country:   p.country || '',
+        price:     p.price  || 25,
+        aliases,
+        tags,
+        allText:   normStr(allText),
+        tokens:    new Set(tokenize(allText)),
+        confidence: p.confidence_score || 0,
+        source_url: p.source_url || '',
+        product_id: p.id || '',
+        matched:   p.matched !== false,
       };
     });
   }
 
-  function guessCategoryFromPath(p) {
+  /* ── Construction de l'index depuis metadata.json (fallback) ─ */
+  function buildIndexFromMetadata(metadata) {
+    searchIndex = Object.entries(metadata).map(([path, info]) => {
+      const src      = normalizeSrc(path);
+      const team     = (info && (info.club || info.team)) || '';
+      const category = (info && info.category) || _guessCategoryFromPath(path);
+      const player   = (info && info.player)   || _guessPlayerFromPath(path);
+      const allText  = [team, player, category].join(' ');
+      return {
+        src, team, teamShort: team, teamKey: normStr(team),
+        category, version: category, season: '', type: '', league: '', country: '',
+        price: PRICES[category] || 25, aliases: [], tags: [],
+        allText: normStr(allText), tokens: new Set(tokenize(allText)),
+        confidence: info && info.score || 0, matched: true,
+        source_url: '', product_id: '',
+      };
+    });
+  }
+
+  function _versionToCategory(v) {
+    const map = { fan: 'fan', player: 'pro', retro: 'retro', kit: 'enfant', enfant: 'enfant' };
+    return map[v] || v || 'fan';
+  }
+
+  function _guessCategoryFromPath(p) {
     const m = String(p).toLowerCase().split('/')[0];
     if (m === 'player') return 'pro';
     if (m === 'kids')   return 'enfant';
@@ -101,68 +175,179 @@
     return '';
   }
 
-  function guessPlayerFromPath(p) {
+  function _guessPlayerFromPath(p) {
     const name = String(p).toLowerCase();
     const players = ['messi','ronaldo','mbappe','neymar','haaland','vinicius',
                      'bellingham','griezmann','kane','salah'];
     return players.find(pl => name.includes(pl)) || '';
   }
 
-  function similarity(a, b) {
-    const grams = s => {
-      s = s.toLowerCase();
-      const gs = new Set();
-      for (let i = 0; i < s.length - 1; i++) gs.add(s.slice(i, i + 2));
-      return gs;
-    };
-    const A = grams(a), B = grams(b);
-    if (!A.size || !B.size) return 0;
-    let inter = 0;
-    A.forEach(g => { if (B.has(g)) inter++; });
-    return inter / (A.size + B.size - inter);
+  function _isCJK(text) {
+    return (text || '').split('').filter(c => c >= '\u4e00' && c <= '\u9fff').length >
+           (text || '').length * 0.3;
   }
+
+  /* ── Algorithme de recherche ───────────────────────────────── */
+  // Ordre de priorité :
+  //   1. Exact match sur team_key ou short_name
+  //   2. Alias exact (ex: "psg" → Paris Saint-Germain)
+  //   3. Contenu dans le nom (startsWith > contains)
+  //   4. Tags
+  //   5. Fuzzy token-level
+  //   JAMAIS de tri par couleur/similarité visuelle
 
   function rank(query) {
     const q      = query.trim();
-    const qTok   = new Set(tokenize(q));
-    const qLower = q.toLowerCase();
+    if (!q) return [];
+    const qNorm  = normStr(q);
+    const qToks  = tokenize(q);
+    if (!qToks.length) return [];
+
+    // Détecter des modificateurs dans la requête
+    const isHome  = /\b(home|domicile|主场)\b/i.test(q);
+    const isAway  = /\b(away|extér|exterieur|客场)\b/i.test(q);
+    const isThird = /\b(third|troisième)\b/i.test(q);
+    const isRetro = /\b(retro|rétro|vintage)\b/i.test(q);
+    const seasonM = q.match(/\b(20\d{2})[/-]?(\d{0,2})\b/);
+    const queriedSeason = seasonM ? seasonM[0] : null;
+
+    // Nettoyer la requête de ses modificateurs pour isoler le nom d'équipe
+    let teamQuery = qNorm
+      .replace(/\b(home|domicile|away|exterieur|extérieur|third|retro|retro|fan|player|maillot|jersey|kit|foot|football|soccer)\b/g, ' ')
+      .replace(/20\d{2}[/-]?\d{0,2}/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+
     return searchIndex
       .map(it => {
         let score = 0;
-        qTok.forEach(t => {
-          if (tokenize(it.team).includes(t))     score += 100;
-          if (tokenize(it.player).includes(t))   score += 90;
-          if (tokenize(it.category).includes(t)) score += 60;
-        });
-        if (it.team.toLowerCase().startsWith(qLower))    score += 80;
-        else if (it.team.toLowerCase().includes(qLower)) score += 50;
-        if (it.player && it.player.toLowerCase().includes(qLower)) score += 45;
-        if (it.category && it.category.toLowerCase().includes(qLower)) score += 35;
-        const bestField = [it.team, it.player].filter(Boolean)
-          .sort((a, b) => similarity(b, q) - similarity(a, q))[0] || '';
-        score += similarity(bestField, q) * 30;
-        return { it, score };
+
+        // ── Filtres contextuels ──────────────────────────────────
+        if (isHome   && it.type && it.type !== 'Home')       return null;
+        if (isAway   && it.type && it.type !== 'Away')       return null;
+        if (isThird  && it.type && it.type !== 'Third')      return null;
+        if (isRetro  && it.version !== 'retro')              return null;
+        if (queriedSeason && it.season && !it.season.includes(queriedSeason.slice(0,4))) return null;
+
+        const teamNorm  = normStr(it.team);
+        const shortNorm = normStr(it.teamShort);
+
+        // ── 1. Exact match sur clé/shortname ────────────────────
+        if (teamNorm  === qNorm || shortNorm === qNorm)  score += 200;
+        if (it.teamKey === qNorm)                         score += 200;
+
+        // ── 2. Alias exact ──────────────────────────────────────
+        if (it.aliases.some(a => normStr(a) === qNorm))  score += 180;
+
+        // ── 3. teamQuery (après nettoyage des modificateurs) ────
+        if (teamQuery) {
+          if (teamNorm  === teamQuery)               score += 160;
+          if (shortNorm === teamQuery)               score += 160;
+          if (teamNorm.startsWith(teamQuery))        score +=  80;
+          if (teamNorm.includes(teamQuery))          score +=  60;
+          if (shortNorm.includes(teamQuery))         score +=  55;
+          if (it.aliases.some(a => normStr(a).startsWith(teamQuery))) score += 70;
+          if (it.aliases.some(a => normStr(a).includes(teamQuery)))   score += 50;
+        }
+
+        // ── 4. Tokens individuels ────────────────────────────────
+        let tokenHits = 0;
+        for (const tok of qToks) {
+          if (tok.length < 2) continue;
+          if (it.tokens.has(tok)) {
+            score += 30;
+            tokenHits++;
+          }
+          // Match partiel
+          if (it.allText.includes(tok)) {
+            score += 15;
+            tokenHits++;
+          }
+        }
+
+        // Bonus si tous les tokens sont présents
+        if (tokenHits >= qToks.length && qToks.length > 1) score += 40;
+
+        // ── 5. Boost haute confiance ─────────────────────────────
+        if (it.matched && it.confidence > 0.85) score += 10;
+        if (it.matched && it.confidence > 0.95) score += 10;
+
+        return score > 0 ? { it, score } : null;
       })
-      .filter(({ score }) => score > 10)
+      .filter(Boolean)
       .sort((a, b) => b.score - a.score)
       .map(({ it }) => it);
+  }
+
+  /* ── Autocomplete API ──────────────────────────────────────── */
+  const SEARCH_API = (typeof window !== 'undefined' && window.ELITEKITS_SEARCH_API) || null;
+  let _suggestCache = {};
+  let _suggestTimer = null;
+
+  function fetchSuggestions(q, callback) {
+    if (!q || q.length < 2) { callback([]); return; }
+
+    const cacheKey = q.toLowerCase();
+    if (_suggestCache[cacheKey]) { callback(_suggestCache[cacheKey]); return; }
+
+    if (SEARCH_API) {
+      // Mode API : appel au serveur FastAPI
+      clearTimeout(_suggestTimer);
+      _suggestTimer = setTimeout(async () => {
+        try {
+          const r = await fetch(`${SEARCH_API}/api/suggest?q=${encodeURIComponent(q)}`);
+          const d = await r.json();
+          const suggestions = (d.suggestions || []).map(s => s.label);
+          _suggestCache[cacheKey] = suggestions;
+          callback(suggestions);
+        } catch { callback([]); }
+      }, 300);
+    } else {
+      // Mode client-side : extraire depuis l'index local
+      const qn = normStr(q);
+      const seen = new Set();
+      const suggestions = [];
+      for (const it of searchIndex) {
+        if (seen.has(it.teamKey) || !it.teamKey) continue;
+        const sn = normStr(it.teamShort);
+        const tn = normStr(it.team);
+        if (sn.startsWith(qn) || tn.startsWith(qn) || sn.includes(qn)) {
+          seen.add(it.teamKey);
+          suggestions.push(it.team);
+          if (suggestions.length >= 8) break;
+        }
+      }
+      _suggestCache[cacheKey] = suggestions;
+      callback(suggestions);
+    }
   }
 
   /* ─────────────────────────────────────────
      SEARCH UI
   ───────────────────────────────────────── */
   function initSearch() {
-    const input   = $('#searchInput');
+    const input    = $('#searchInput');
     const clearBtn = $('#searchClear');
     if (!input) return;
 
+    // Créer le dropdown d'autocomplete
+    const dropdown = _ensureAutocomplete(input);
+
+    let _searchTimer = null;
     input.addEventListener('input', e => {
       const q = e.target.value.trim();
       if (clearBtn) clearBtn.classList.toggle('visible', q.length > 0);
-      if (!q) { hideResults(); return; }
-      const results = rank(q);
-      state.allResults = results;
-      applyFilterAndRender();
+      if (!q) { hideResults(); _hideDropdown(dropdown); return; }
+
+      // Autocomplete (debounce 300ms)
+      fetchSuggestions(q, items => _renderDropdown(dropdown, items, input));
+
+      // Résultats de recherche (debounce 150ms pour fluidité)
+      clearTimeout(_searchTimer);
+      _searchTimer = setTimeout(() => {
+        const results = rank(q);
+        state.allResults = results;
+        applyFilterAndRender();
+      }, 150);
     });
 
     // Clear button
@@ -170,6 +355,44 @@
       input.value = '';
       clearBtn.classList.remove('visible');
       hideResults();
+      _hideDropdown(dropdown);
+    });
+
+    // Fermer le dropdown si clic ailleurs
+    document.addEventListener('click', e => {
+      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        _hideDropdown(dropdown);
+      }
+    });
+
+    // Keyboard navigation dans le dropdown
+    input.addEventListener('keydown', e => {
+      const items = $$('.ac-item', dropdown);
+      const active = $('.ac-item.ac-active', dropdown);
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = active ? (items.indexOf(active) + 1) % items.length : 0;
+        items.forEach(i => i.classList.remove('ac-active'));
+        items[next].classList.add('ac-active');
+        input.value = items[next].textContent;
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = active ? (items.indexOf(active) - 1 + items.length) % items.length : items.length - 1;
+        items.forEach(i => i.classList.remove('ac-active'));
+        items[prev].classList.add('ac-active');
+        input.value = items[prev].textContent;
+      } else if (e.key === 'Enter') {
+        if (active) {
+          input.value = active.textContent;
+          _hideDropdown(dropdown);
+          const results = rank(input.value);
+          state.allResults = results;
+          applyFilterAndRender();
+        }
+      } else if (e.key === 'Escape') {
+        _hideDropdown(dropdown);
+      }
     });
 
     // Filter chips
@@ -181,6 +404,70 @@
         applyFilterAndRender();
       });
     });
+  }
+
+  /* ── Autocomplete dropdown ─────────────────────────────────── */
+  function _ensureAutocomplete(input) {
+    let dropdown = $('#searchAutocomplete');
+    if (dropdown) return dropdown;
+
+    dropdown = document.createElement('div');
+    dropdown.id = 'searchAutocomplete';
+    dropdown.style.cssText = [
+      'position:absolute', 'z-index:999', 'background:rgba(10,10,28,0.98)',
+      'border:1px solid rgba(124,58,237,0.5)', 'border-radius:10px',
+      'box-shadow:0 8px 32px rgba(0,0,0,0.5)', 'display:none',
+      'min-width:260px', 'overflow:hidden', 'backdrop-filter:blur(8px)',
+    ].join(';');
+
+    const wrap = input.closest('.search-wrap, .search-bar-wrap, .header-search') || input.parentElement;
+    wrap.style.position = 'relative';
+    wrap.appendChild(dropdown);
+    return dropdown;
+  }
+
+  function _renderDropdown(dropdown, items, input) {
+    if (!items || !items.length) { _hideDropdown(dropdown); return; }
+    dropdown.innerHTML = items.map(label =>
+      `<div class="ac-item" style="padding:0.65rem 1rem;cursor:pointer;font-size:0.9rem;color:#e2e8f0;
+        transition:background 0.15s;display:flex;align-items:center;gap:0.5rem">
+        <i class="fa-solid fa-magnifying-glass" style="color:#7c3aed;font-size:0.75rem;opacity:0.7"></i>
+        ${_escHtml(label)}
+      </div>`
+    ).join('');
+
+    $$('.ac-item', dropdown).forEach((el, i) => {
+      el.addEventListener('mouseenter', () => {
+        $$('.ac-item', dropdown).forEach(x => x.classList.remove('ac-active'));
+        el.classList.add('ac-active');
+        el.style.background = 'rgba(124,58,237,0.2)';
+      });
+      el.addEventListener('mouseleave', () => {
+        el.classList.remove('ac-active');
+        el.style.background = '';
+      });
+      el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        input.value = items[i];
+        _hideDropdown(dropdown);
+        $('#searchClear')?.classList.add('visible');
+        const results = rank(items[i]);
+        state.allResults = results;
+        applyFilterAndRender();
+      });
+    });
+
+    dropdown.style.display = 'block';
+  }
+
+  function _hideDropdown(dropdown) {
+    if (dropdown) dropdown.style.display = 'none';
+  }
+
+  function _escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function applyFilterAndRender() {
@@ -248,26 +535,43 @@
     const card = document.createElement('div');
     card.className = 'product-card';
 
+    const teamLabel = item.teamShort || item.team || 'Maillot';
+    const cat       = item.category  || 'fan';
+    const season    = item.season    || '';
+    const type      = item.type      || '';
+    const typeLabel = _typeLabel(type);
+    const subtitle  = [typeLabel, season].filter(Boolean).join(' \u00b7 ');
+
     const addDataStr = JSON.stringify({
       src:      item.src,
-      team:     item.team || '',
-      category: item.category || 'fan',
+      team:     teamLabel,
+      category: cat,
     }).replace(/"/g, '&quot;');
 
     card.innerHTML = `
       <div class="product-card-img">
-        <img src="${item.src}" alt="${item.team || 'Maillot'}" loading="lazy">
-        <span class="product-badge ${categoryBadgeClass(item.category)}">${categoryLabel(item.category)}</span>
+        <img src="${item.src}" alt="${teamLabel}" loading="lazy"
+             onerror="this.src='';this.onerror=null">
+        <span class="product-badge ${categoryBadgeClass(cat)}">${categoryLabel(cat)}</span>
         <button class="product-card-add" data-add="${addDataStr}" aria-label="Ajouter au panier">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
       <div class="product-card-info">
-        <div class="product-team">${item.team || 'Maillot'}</div>
-        ${item.player ? `<div class="product-player">${item.player}</div>` : ''}
-        <div class="product-price"><span class="from">d\u00e8s</span> ${startingPrice(item.category)}</div>
+        <div class="product-team">${teamLabel}</div>
+        ${subtitle ? `<div class="product-player">${subtitle}</div>` : ''}
+        <div class="product-price"><span class="from">d\u00e8s</span> ${startingPrice(cat)}</div>
       </div>`;
     return card;
+  }
+
+  function _typeLabel(type) {
+    const map = {
+      'Home': 'Domicile', 'Away': 'Ext\u00e9rieur',
+      'Third': 'Third',   'Goalkeeper': 'Gardien',
+      'Training': 'Training', 'Special': '\u00c9d. Sp\u00e9ciale',
+    };
+    return map[type] || type || '';
   }
 
   /* Enhance category pages: convert raw <img> tags into product cards */
@@ -282,12 +586,12 @@
     const items = imgs.map(img => {
       const src  = img.getAttribute('src');
       const key  = src && src.startsWith('images/') ? src.replace(/^images\//, '') : src;
-      const info = (key && metadata[key]) || {};
+      const info = (key && metadata && metadata[key]) || {};
       return {
         src,
         team:     info.club || info.team || '',
-        category: cat || info.category || guessCategoryFromPath(src || ''),
-        player:   info.player || guessPlayerFromPath(src || ''),
+        category: cat || info.category || _guessCategoryFromPath(src || ''),
+        player:   info.player || _guessPlayerFromPath(src || ''),
       };
     });
 
